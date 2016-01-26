@@ -4,7 +4,7 @@ python-qqwry
 
 Python Parse QQWry, based `qqwry.pdf`_
 
-![Build Status](https://travis-ci.org/fatelei/pyqqwry.svg)
+`Build Status`_
 
 -------
 Install
@@ -28,3 +28,4 @@ Usage
 
 
 .. _qqwry.pdf: https://drive.google.com/file/d/0B0EvSfZXS15seVVBRTlUOVlUb2M/view?usp=sharing
+.. _Build Status: https://travis-ci.org/fatelei/pyqqwry.svg
