@@ -1,6 +1,8 @@
 # python-qqwry
 Python Parse QQWry, based [qqwry.pdf](https://drive.google.com/file/d/0B0EvSfZXS15seVVBRTlUOVlUb2M/view?usp=sharing)
 
+![Build Status](https://travis-ci.org/fatelei/pyqqwry.svg)
+
 ## Install
 
 ```
