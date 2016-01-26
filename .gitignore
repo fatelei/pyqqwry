@@ -1,0 +1,14 @@
+# python
+build
+dist
+*.egg-info
+*.pyc
+
+# tox
+.tox
+
+# test
+.coverage
+
+# tox
+__pycache__
