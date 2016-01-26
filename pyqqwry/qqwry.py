@@ -101,7 +101,7 @@ class QQWry(object):
         """
         self.file_obj.seek(offset)
         tmp = self.file_obj.read(1)
-        return ord(tmp)
+        return ord(tmp) if tmp else 0
 
     def __read_value(self, offset):
         """Read value.
@@ -112,6 +112,12 @@ class QQWry(object):
         # If the offset is zero, country or region is unknown.
         if offset == 0:
             return "N/A"
+
+        flag = self.__read_flag(offset)
+        if flag == Flag.TWO:
+            tmp = self.file_obj.read(3)
+            offset = unpack("I", tmp + "\0")[0]
+            return self.__read_value(offset)
 
         buf = []
         self.file_obj.seek(offset)
@@ -137,20 +143,19 @@ class QQWry(object):
         if flag == Flag.ONE:
             tmp = self.file_obj.read(3)
             offset = unpack("I", tmp + "\0")[0]
-            return self.__read_record(offset)
+
+            country = self.__read_value(offset)
+            flag = self.__read_flag(offset)
+
+            if flag == Flag.TWO:
+                region = self.__read_value(offset + 4)
+            else:
+                region = self.__read_value(offset + len(country) + 1)
         elif flag == Flag.TWO:
             tmp = self.file_obj.read(3)
             cn_offset = unpack("I", tmp + "\0")[0]
             country = self.__read_value(cn_offset)
-
-            flag = self.__read_flag(offset + 4)
-
-            if flag == Flag.TWO or flag == Flag.ONE:
-                tmp = self.file_obj.read(3)
-                region_offset = unpack("I", tmp + "\0")[0]
-                region = self.__read_value(region_offset)
-            else:
-                region = self.__read_value(offset + 4)
+            region = self.__read_value(offset + 4)
         else:
             country = self.__read_value(offset)
             region = self.__read_value(offset + len(country) + 1)
@@ -170,7 +175,6 @@ class QQWry(object):
         idx = self.__binary_search(ip, 0, self.idx_num - 1)
         idx_offset = self.idx_start + idx * 7
         record_offset = self.__read_record_area_offset(idx_offset + 4)
-
         rst = self.__read_record(record_offset + 4)
 
         if rst:
