@@ -4,9 +4,6 @@ python-qqwry
 
 Python Parse QQWry, based `qqwry.pdf`_
 
-.. image:: https://travis-ci.org/fatelei/pyqqwry.svg
-  :alt: Build Status
-
 -------
 Install
 -------
