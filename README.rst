@@ -9,6 +9,7 @@ API
 -------
 
 * query
+
   * str ip: IP address wanted to be queried.
   * return a tuple, including country, province, city, isp. 
 
