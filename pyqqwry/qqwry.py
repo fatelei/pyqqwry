@@ -13,7 +13,7 @@ from struct import unpack
 
 from pylru import lrudecorator
 from pyqqwry.macro import Flag
-from pyqqwry.utils import decode
+from pyqqwry.utils import decode, generate
 
 
 class QQWry(object):
@@ -178,6 +178,7 @@ class QQWry(object):
         rst = self.__read_record(record_offset + 4)
 
         if rst:
-            return (decode(rst[0]), decode(rst[1]))
+            country, province, city = generate(decode(rst[0]))
+            return (country, province, city, decode(rst[1]))
         else:
             return None

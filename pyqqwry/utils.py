@@ -6,6 +6,8 @@
     Utils modules.
 """
 
+from pyqqwry.macro import Province
+
 
 def decode(hex_str):
     """Decode hex str from cz.net to unicode.
@@ -17,3 +19,18 @@ def decode(hex_str):
         return unicode(hex_str, "gbk").encode("utf8")
     except:
         return ""
+
+
+def generate(row):
+    """Get china: country, province, city.
+
+    :param str row: The result of row parsed from qqwry
+    :return: A tuple.  
+    """
+    candicates = Province.china
+
+    for (cn, province) in candicates:
+        if province in row:
+            _, city = row.split(province)
+            return cn, province, city
+    return row, "", ""

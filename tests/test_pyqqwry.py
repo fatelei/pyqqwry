@@ -25,14 +25,17 @@ class TestQQWry(unittest.TestCase):
         """Test `QQWry.query` method.
         """
         rst = self.qqwry.query("101.81.24.18")
-        self.assertEqual(len(rst), 2)
-        self.assertEqual(rst[0], "上海市徐汇区")
-        self.assertEqual(rst[1], "电信")
+        self.assertEqual(len(rst), 4)
+        self.assertEqual(rst[0], "中国")
+        self.assertEqual(rst[1], "上海市")
+        self.assertEqual(rst[2], "徐汇区")
+        self.assertEqual(rst[3], "电信")
 
     def test_query_one_two(self):
         """Test redirect from one to region two.
         """
         rst = self.qqwry.query("122.100.128.17")
-        self.assertEqual(len(rst), 2)
-        self.assertEqual(rst[0], "澳门")
-        self.assertEqual(rst[1], "特别行政区")
+        self.assertEqual(len(rst), 4)
+        self.assertEqual(rst[0], "中国")
+        self.assertEqual(rst[1], "澳门")
+        self.assertEqual(rst[3], "特别行政区")
